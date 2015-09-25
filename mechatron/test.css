@@ -1,0 +1,11 @@
+table
+{
+	width: 500px !important;
+	height: 500px !important;
+}
+td
+{
+ border:thick 3px !important;
+ border-radius: 5px !important;
+ border-color:#000;
+}/* CSS Document */

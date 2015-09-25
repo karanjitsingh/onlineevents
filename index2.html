@@ -1,0 +1,427 @@
+<!doctype html>
+<html>
+<head>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+<script src="./scripts/particles.js/particles.js"></script>
+<style>
+	html,body {
+		height:100%;
+		overflow:hidden;
+		padding:0px;
+		margin:0px;
+		font-family: 'Open Sans';
+		background: #111;
+	}
+	#left-half {
+		width:50%;
+		position:absolute;
+		left:0px;
+		height: 100%;
+		top:0px;
+		background: #222;
+		transition: left 0.5s ease-out, box-shadow 0.5s ease-out;
+
+	}
+
+	#right-half {
+		width:50%;
+		position:absolute;
+		right:0px;
+		height: 100%;
+		top:0px;
+		background: #222;
+		transition: right 0.5s ease-out, box-shadow 0.5s ease-out;
+	}
+
+	#right-half.register,#right-half.signin {
+		right:-250px;
+		box-shadow: 0px 0px 10px #000;
+	}
+
+	#left-half.register,#left-half.signin {
+		left:-250px;
+		box-shadow: 0px 0px 10px #000;
+	}
+
+	#right-half.leaderboard {
+		right:-400px;
+		box-shadow: 0px 0px 10px #000;
+	}
+
+	#left-half.leaderboard {
+		left:-400px;
+		box-shadow: 0px 0px 10px #000;
+	}
+
+	.overlay {
+		height: 100%;
+		width: 100%;
+		left:0px;
+		right:0px;
+	}
+
+	.icon {
+		cursor: pointer;
+		height:80px; width:80px; background:rgba(255,255,255,0.3); border-radius:100px; position:absolute; 
+		margin-top:-40px;
+		opacity:0;
+		transition:left 0.2s ease-out,top 0.2s ease-out,opacity 0.2s ease-out;
+		z-index: 5;
+	}
+
+	/*#left-half .icon {
+		right:-40px;
+		top:400px;
+	}
+	
+	#right-half .icon {
+		left:-40px;
+		top:400px;
+	}*/
+
+	.tint {
+		opacity:0;
+		z-index: -1;
+		background:#fff;
+		position: absolute;
+		left:0px;
+		top:0px;
+		height: 100%;
+		width: 100%;
+		transition: opacity 0.5s ease-out;
+
+	}
+
+	#right-half.register .tint,#left-half.register .tint,#right-half.leaderboard .tint,#left-half.leaderboard .tint,#right-half.signin .tint,#left-half.signin .tint {
+		z-index: 10 !important;
+		opacity: 0.05 !important;
+	}
+
+	table,td,tr {
+		border:0px;
+		padding:0px;
+		border-spacing: 0px;
+	}
+
+	input,a {
+		outline: none !important;
+	}
+
+	input[type='text'],input[type='password'] {
+		background: rgba(255,255,255,0.05);
+		font-size:16px;
+		border: 1px;
+		outline:none !important;
+		padding:8px 8px 6px 8px;
+		box-sizing:border-box;
+		width:400px;
+		margin-bottom:5px;
+		color:#fff;
+		transition: background-color 0.2s ease-out;
+	}
+	input[type='text']:hover,input[type='password']:hover {
+		background-color: rgba(255,255,255,0.15);
+	}
+
+	::-webkit-input-placeholder {
+	   color: #888;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	   color: #888;  
+	}
+
+	::-moz-placeholder {  /* Firefox 19+ */
+	   color: #888;  
+	}
+
+	:-ms-input-placeholder {  
+	   color: #888;  
+	}
+
+	span.registration {
+		color:#fff;
+		font-size: 20px;
+		font-weight: 300;
+		padding:10px 0px 10px 0px;
+		display: block;
+	}
+
+	input[type='button'] {
+		border:0px;
+		transition: background-color 0.2s ease-out;
+		font-size: 14px;
+		color:#aaa;
+		height:32px;
+		width: 100px;
+		float: right;
+		margin-top: 10px;
+		margin-left: 10px;
+		cursor: pointer;
+	}
+
+	#userinfo span {
+		color:#ddd;
+	}
+
+	input[type='button'].submit {
+		background-color: rgba(5,136,201,0.3);
+	}
+
+	input[type='button'].cancel {
+		background-color: rgba(255,255,255,0.1);
+	}
+
+	input[type='button'].cancel:hover {
+		background-color: rgba(255,255,255,0.2);
+	}
+
+	input[type='button'].submit:hover {
+		background-color: rgba(5,136,201,0.7);
+	}
+	
+	#userinfo a, #leaderboardinfo a {
+		margin-left:8px;
+		color:#ddd;
+		cursor: pointer;
+		z-index: 100;
+
+	}
+
+	#userinfo a:hover, #leaderboardinfo a:hover {
+		color: #0588C9;
+	}
+
+	#userinfo.loggedout section:nth-child(1),#userinfo.loggedin section:nth-child(2) {
+		display:none;
+	}
+	#userinfo.loggedout section:nth-child(2),#userinfo.loggedin section:nth-child(1) {
+		display:block;
+	}
+
+	#event {
+		height:100%; width:100%; position:absolute; background:#333;
+		transition: top 0.3s ease-out;
+		z-index: 100;
+		top:0%;
+	}
+
+	#event.hidden {
+		top:100%;
+	}
+
+	#iconCaption {
+		font-family:'Roboto'; font-size:42px; color:#fff; font-weight:300; text-align:center;
+		transition: opacity 0.2s;
+		opacity:0;
+	}
+
+	#register table, #signin table, #leaderboard table {
+		opacity: 0;
+		background: rgba(17,17,17,0.3);
+		padding:50px;
+		transition: opacity 0.2s linear;
+	}
+
+	#register.show table, #signin.show table, #leaderboard.show table {
+		opacity: 1;
+		z-index: 5;
+	}
+
+	#userinfo, #leaderboardinfo {
+		z-index: 10;
+	}
+
+</style>
+</head>
+<body>
+<div id="register" style="position:absolute; left:0px; top:0px; height:100%; width:100%; background:#111; display:none">
+	<table style="height:100%; width:400px; position:absolute; top:0px; left:50%; margin-left:-250px;">
+		<tr>
+			<td style="vertical-align:middle;">
+				<div style="width:400px;">
+					<ul style="list-style-type:none; margin:0px; padding:0px;">
+					<li><span class="registration">Details:</span></li>
+					<li><input type="text" placeholder="Name"/></li>
+					<li><input type="text" placeholder="Registration"/></li>
+					<li><input type="text" placeholder="Phone"/></li>
+					<li><input type="text" placeholder="Email"/></li>
+					<li><input type="text" placeholder="College"/></li>
+					<li><span class="registration">Login:</span></li>
+					<li><input type="text" placeholder="Username"/></li>
+					<li><input type="password" placeholder="Password"/></li>
+					<li><input type="password" placeholder="Confirm Password"/></li>
+					<li><input type="button" class="submit" value="Submit" /><input type="button" class="cancel" value="Cancel" onclick="closePage()"/></li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="signin" style="position:absolute; left:0px; top:0px; height:100%; width:100%; background:#111; display:none">
+	<table style="height:100%; width:400px; position:absolute; top:0px; left:50%; margin-left:-250px;">
+		<tr>
+			<td style="vertical-align:middle;">
+				<div style="width:400px;">
+					<ul style="list-style-type:none; margin:0px; padding:0px;">
+					<li><span class="registration">Login:</span></li>
+					<li><input type="text" placeholder="Username"/></li>
+					<li><input type="password" placeholder="Password"/></li>
+					<li><input type="button" class="submit" value="Login" onclick="login()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/></li>
+					</ul>
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<div id="leaderboard" style="position:absolute; left:0px; top:0px; height:100%; width:100%; background:#111; display:none">
+	<table style="height:100%; width:700px; position:absolute; top:0px; left:50%; margin-left:-400px;">
+	<tr>
+		<td>
+			<div style="width:700px; height:400px; background:rgba(255,255,255,0.1)">
+
+			</div>
+		</td>
+	</tr>
+	</table>
+</div>
+<div id="left-half">
+	<div class="tint"></div>
+	
+
+	<div style="height:440px; right:0px; margin-top:-220px; top:50%; position:absolute; width:400px;">
+		<div class="icon" style="right:26px; top:10px;" eventname="tt"></div>
+		<div class="icon" style="right:130px; top:90px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="right:175px; top:220px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="right:130px; top:350px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="right:26px; top:430px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		
+	</div>
+</div>
+<div id="right-half">
+	<div class="tint"></div>
+	
+	<div style="height:440px; left:0px; margin-top:-220px; top:50%; position:absolute; width:400px;">
+		<div class="icon" style="left:26px; top:10px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="left:130px; top:90px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="left:175px; top:220px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="left:130px; top:350px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+		<div class="icon" style="left:26px; top:430px;" eventname="Crossworld" url="http://oe.localhost.com"></div>
+	</div>
+</div>
+<div class="overlay">
+<div id="particles-js" style="position:absolute; left:0px; top:0px; height:100%; width:100%;"></div>
+	<div id="userinfo" class="loggedout" style="position:absolute; right:50px; top:50px"><section><span>User, </span><a onclick="logout()">Logout</a></section><section><a onclick="openPage('register')">Register</a><a onclick="openPage('signin')">Sign in</a></section></div>
+	<div id="leaderboardinfo" class="loggedout" style="position:absolute; left:50px; top:50px"><a onclick="openPage('leaderboard')">Leaderboard</a></div>
+	<table style="height:100px; width:300px; margin:-50px 0px 0px -150px; position:absolute; top:50%; left:50%; ">
+		<tr><td id="iconCaption"></tr>
+	</table>
+</div>
+<div id="event" class="hidden">
+<iframe id="eventIframe" style="display:none; height:100%; width:100%; border:0px;"></iframe>
+</div>
+<div id="particles-js"></div>
+</body>
+<script type="text/javascript">
+	function $id(obj) {
+		return document.getElementById(obj);
+	}
+
+	var pageOpen = "";
+	var icons = document.getElementsByClassName("icon");
+
+	$id("eventIframe").onload = function() {
+		$id("eventIframe").style.display="block";
+	};
+
+	for(var i=0;i<icons.length;i++) {
+		var eventname = icons[i].getAttribute("eventname");
+		if(eventname != "tt") {
+			icons[i].onclick = iconClick;
+			icons[i].onmouseover = iconOnMouseOver;
+			icons[i].onmouseout = iconOnMouseOut;
+		}
+
+	}
+
+	function iconOnMouseOver(e) {
+		$id("iconCaption").innerHTML = e.target.getAttribute("eventname");
+		$id("iconCaption").style.opacity = 1; 
+	}
+
+	function iconOnMouseOut() {
+		$id("iconCaption").innerHTML = " ";
+		$id("iconCaption").style.opacity = 0;
+	}
+
+	function iconClick(e) {
+		$id("eventIframe").src = e.target.getAttribute("url");
+		$id("event").removeAttribute("class");
+
+	}
+
+
+
+	function openPage(page) {
+		if(page == pageOpen){
+			closePage();
+			return;
+		}
+		else 
+			pageOpen = page;
+		$id("register").style.display="none";
+		$id("leaderboard").style.display="none";
+		$id("signin").style.display="none";
+		$id("register").removeAttribute("class");
+		$id("signin").removeAttribute("class");
+		$id("leaderboard").removeAttribute("class");
+		$id(page).style.display="block";
+		setTimeout(function(){$id(page).className="show";},500);	
+		$id("left-half").className = page;
+		$id("right-half").className = page;
+		
+	}
+
+	function closePage() {
+		$id("register").removeAttribute("class");
+		$id("signin").removeAttribute("class");
+		$id("leaderboard").removeAttribute("class");
+		pageOpen = "";
+		setTimeout(function(){
+			$id("left-half").removeAttribute("class");
+			$id("right-half").removeAttribute("class");
+		},200);
+	}
+
+	function loginSuccess(user) {
+		$id('userinfo').getElementsByTagName("span")[0].innerHTML = "Welcome! " + user + ", ";
+		$id('userinfo').className = "loggedin";
+	}
+
+	function login() {
+		loginSuccess('kj')
+		closePage();
+	}
+
+	function logout() {
+		id('userinfo').className = "loggedout";
+	}
+
+	function initAnimate() {
+		for(var i=0;i<icons.length/2;i++) {
+			icons[i].style.transitionDelay = 0.1*i + "s";
+			icons[i].style.opacity = 1;
+			icons[i+5].style.transitionDelay = 0.1*i + "s";
+			icons[i+5].style.opacity = 1;
+		}
+	}
+
+	initAnimate();
+
+	particlesJS.load('particles-js', 'scripts/particles.js/config.json', function() {
+		console.log('callback - particles.js config loaded');
+	});
+</script>
+</html>

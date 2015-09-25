@@ -1,0 +1,24 @@
+REGISTRATION
+------------
+101 -> incomplete fields
+102 -> username not available
+103 -> invalid input
+104 -> not registered
+105 -> registered
+106 -> already registered
+
+LOGIN
+-----
+201 -> incomplete fields
+202 -> invalid fields 
+203 -> user does not exist
+204 -> successful login
+205 -> incorrect password
+
+
+
+
+NOTES
+-----
+
+#Usernames can only be alpha numeric characters

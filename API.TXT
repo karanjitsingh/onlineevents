@@ -1,0 +1,4 @@
+/register :
+
+TO REGISTER USERS
+PARAMETERS : name , registration , phone , email , college , username , password
