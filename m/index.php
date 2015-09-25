@@ -224,6 +224,7 @@ include "../session.php";
 		position:fixed;bottom: -32px;width: 100%;height: 32px;background: #444; padding: 4px;
 		opacity: 0; box-sizing:border-box;
 		transition: transform 0.2s ease-out,opacity 0.2s ease-out;
+		z-index: 110;
 
 	}
 
@@ -278,7 +279,7 @@ include "../session.php";
 					<li>
 					<span class="err"></span>
 					<input type="button" class="submit" value="Submit" onclick="register()" /><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
-					<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
+					<svg class="loadingSVG" width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
 						        <g transform="translate(1 1)" stroke-width="2">
 						            <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>
@@ -308,7 +309,7 @@ include "../session.php";
 					<li>
 					<span  class="err"></span>
 					<input type="button" class="submit" value="Login" onclick="login()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
-					<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
+					<svg class="loadingSVG" width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
 						        <g transform="translate(1 1)" stroke-width="2">
 						            <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>

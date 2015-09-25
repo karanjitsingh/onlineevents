@@ -278,6 +278,7 @@ header('Location: http://onlineevents.techtatva.in/m');
 		position:fixed;bottom: -60px;width: 250px;left: 50%;height: 60px;margin-left: -125px;border-radius: 3px;background: #555;box-shadow: 0px 1px 1px 0px #000;padding: 14px;box-sizing: border-box;
 		opacity: 0;
 		transition: transform 0.2s ease-out,opacity 0.2s ease-out;
+		z-index: 110;
 
 	}
 
@@ -315,7 +316,7 @@ header('Location: http://onlineevents.techtatva.in/m');
 					<li>
 					<span class="err"></span><input type="button" class="submit" value="Submit" onclick="register()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
 
-						<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
+						<svg class="loadingSVG" width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
 						        <g transform="translate(1 1)" stroke-width="2">
 						            <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>
@@ -343,7 +344,7 @@ header('Location: http://onlineevents.techtatva.in/m');
 					<li><input type="text" placeholder="Username"/></li>
 					<li><input type="password" placeholder="Password"/></li>
 					<li><span class="err"></span><input type="button" class="submit" value="Login" onclick="login()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
-						<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
+						<svg class="loadingSVG" width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
 						        <g transform="translate(1 1)" stroke-width="2">
 						            <circle stroke-opacity=".5" cx="18" cy="18" r="18"></circle>

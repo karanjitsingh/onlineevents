@@ -3,7 +3,7 @@
 var ajaxwaiting = false;
 
 function toggleAjax() {
-	var svg = document.getElementsByTagName("svg");
+	var svg = document.getElementsByClassName("loadingSVG");
 	if(ajaxwaiting == true)
 	{
 		for(var i=0;i<svg.length;i++)
@@ -192,7 +192,7 @@ function login() {
 
 function logoutConfirm() {
 	document.getElementById('userinfo').className = "loggedout";
-	notifcation.show("Logged out successfully.");
+	notification.show("Logged out successfully.");
 }
 
 function logout(err) {
