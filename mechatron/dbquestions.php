@@ -12,14 +12,15 @@ $count=mysqli_num_rows($result);
 if($count==0)
 {
 	$q=randomize();
-	$sql="insert into oe_mechatron_users(Username,QNo,Skip,Answered,Options,Score) values('$username','0','3','0','0','0')";
+	$sql="insert into oe_mechatron_users(Username,QNo,Skip,Answered,Options,Score,Complete) values('$username','0','3','0','0','0','0')";
 	$result=mysqli_query($con,$sql);
 }
 $sql1="select * from oe_mechatron_users where Username='$username'";
 $result1=mysqli_query($con,$sql1);
 $row=mysqli_fetch_array($result1,MYSQL_ASSOC);
 $qno=$row['QNo'];
-if($qno==0)
+$answered=$row['Answered'];
+if($qno==0 || $answered>3)
 {
 	$q=randomize();
 	$sql="update oe_mechatron_users set QNo='$q' where Username='$username'";
@@ -44,12 +45,13 @@ $skip=$row['Skip'];
 $score=$row['Score'];
 $option=array($o1,$o2,$o3,$o4,$o5,$o6);
 $store=serialize($option);
-$sql="update oe_mechatron_users set Options='$store' where Username='$username'";
+$sql="update oe_mechatron_users set Options='$store',Answered='0' where Username='$username'";
 $result=mysqli_query($con,$sql);
 $sql="select * from oe_mechatron_users where Username='$username'";
 $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result,MYSQL_ASSOC);
-$options=array_values(unserialize($row['Options']));
+$options=unserialize($row['Options']);
+$options=array_values($options);
 }
 else
 {
@@ -63,7 +65,8 @@ $row1=mysqli_fetch_array($result);
 $skip=$row1['Skip'];
 $score=$row1['Score'];
 $options_array=$row1['Options'];
-$options=array_values(unserialize($row1['Options']));
+$options=unserialize($row1['Options']);
+$options=array_values($options);
 }
 function randomize()
 {

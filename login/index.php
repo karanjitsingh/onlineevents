@@ -3,8 +3,8 @@
 	global $conn;
 	$username = $_REQUEST['username'];
 	$password = $_REQUEST['password'];
-	$token = $_REQUEST['token'];
-	$token = md5($token);
+	//$token = $_REQUEST['token'];
+	$token = "";
 	$pass_hashed = md5($password);
 	//JSONS
 	$status201 = array('status' => '201');
@@ -16,8 +16,10 @@
 	function login()
 	{
 		global $username;
+		global $token;
 		session_start();
 		$_SESSION['username'] = $username;
+		$_SESSION['token'] = $token;
 		$_SESSION['session'] = true;
 	}
 	//FILTERS
@@ -40,9 +42,12 @@
 			{
 				if($row['user_password'] == $pass_hashed)
 				{
+					
 					//success
-					//$qry = "UPDATE oe_players_main SET user_token = '$token' WHERE user_username = '$username'";
-					//mysqli_query($conn, $qry);
+					$token = md5($username.time().$_SERVER['REMOTE_ADDR']);
+					
+					$qry = "UPDATE oe_players_main SET user_token = '$token' WHERE user_username = '$username'";
+					mysqli_query($conn, $qry);
 					login();
 					echo json_encode($status204);
 				}

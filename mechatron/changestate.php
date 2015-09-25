@@ -16,6 +16,9 @@ $result=mysqli_query($con,$sql);
 $count=mysqli_num_rows($result);
 if($count==36)
 {
+$sql="update oe_mechatron_users set Complete='1' where Username='$username'";
+$result=mysqli_query($con,$sql);
+
   $data=array("status"=>"complete");
   echo json_encode($data);
 }
@@ -25,32 +28,6 @@ $sqlred="select * from oe_mechatron_currentstate where Color='0' and Username='$
 $resultred=mysqli_query($con,$sqlred);
 $count_green=mysqli_num_rows($resultgreen);
 $count_red=mysqli_num_rows($resultred);
-
-
-if($answered>1 && $answered<=3)
-{
-  $sql="select * from oe_mechatron_currentstate where Username='$username' order by Id DESC limit 2";
-  $result=mysqli_query($con,$sql);
-  $i=0;
-
-  while($row=mysqli_fetch_array($result,MYSQL_ASSOC))
-  {
-    $sid[$i]=$row['SId'];
-    $color[$i]=$row['Color'];
-    $i++;
-  }
-  if($sid[0]==($sid[1]+1) || $sid[0]==($sid[1]+10) || $sid[1]==($sid[0]+1) || $sid[1]==($sid[0]+10))
-{
-if($color[0]+$color[1]==1)
-{
-  $sql="update oe_mechatron_users set Answered='3' where Username='$username'";
-$result=mysqli_query($con,$sql);
-  $data=array(
-    "status"=>"10");
-  echo json_encode($data);
-}
-}
-}
 if($count_green>=3)
 {
   $i=0;
@@ -248,6 +225,31 @@ for($i=0;$i<$length;$i++)
 }
 }
 }
+
+if($answered>1 && $answered<=3)
+{
+  $sql="select * from oe_mechatron_currentstate where Username='$username' order by Id DESC limit 2";
+  $result=mysqli_query($con,$sql);
+  $i=0;
+
+  while($row=mysqli_fetch_array($result,MYSQL_ASSOC))
+  {
+    $sid[$i]=$row['SId'];
+    $color[$i]=$row['Color'];
+    $i++;
+  }
+  if($sid[0]==($sid[1]+1) || $sid[0]==($sid[1]+10) || $sid[1]==($sid[0]+1) || $sid[1]==($sid[0]+10))
+{
+if($color[0]+$color[1]==1)
+{
+  $sql="update oe_mechatron_users set Answered='3' where Username='$username'";
+$result=mysqli_query($con,$sql);
+  $data=array(
+    "status"=>"10");
+  echo json_encode($data);
+}
+}
+}
 $sqlblue="select * from oe_mechatron_currentstate where Color='3' and Username='$username'";
 $resultblue=mysqli_query($con,$sqlblue);
 $countblue=mysqli_num_rows($resultblue);
@@ -332,6 +334,7 @@ for($i=0;$i<$length;$i++)
     $result=mysqli_query($con,$sql);
     $row=mysqli_fetch_array($result,MYSQL_ASSOC);
     $score=$row['Score'];
+$answered=$row['Score'];
     $score=$score+20;
     $sql="update oe_mechatron_users set Score='$score' where Username='$username'";
     $result=mysqli_query($con,$sql);
@@ -339,6 +342,7 @@ for($i=0;$i<$length;$i++)
       "id"=>$sidblue[$key[0]],
       "id1"=>$sidblue[$key[1]],
       "id2"=>$sidblue[$key[2]],
+"answered"=>$answered,
       "status"=>"222",
       "score"=>$score);
     echo json_encode($data);

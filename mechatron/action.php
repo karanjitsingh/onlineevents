@@ -11,7 +11,7 @@ die();
  $row=mysqli_fetch_array($result);
  $qno=$row['QNo'];
  $answered=$row['Answered'];
- if($answered==3)
+ if($answered>=3)
  {
  $sql1="update oe_mechatron_users set QNo='0', Answered='0',Options='0' where Username='$username'";
  $result1=mysqli_query($con,$sql1);

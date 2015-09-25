@@ -14,10 +14,11 @@ $sql="select * from oe_mechatron_users where Username='$username'";
 $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result,MYSQL_ASSOC);
 $qno=$row['QNo'];
+$answered=$row['Answered'];
 $sql="select * from oe_mechatron_questions where Id='$qno' and (O1='$option' OR O2='$option' OR O3='$option' OR O4='$option' OR O5='$option' OR O6='$option')";
 $result=mysqli_query($con,$sql);
 $count=mysqli_num_rows($result);
-if($count==1)
+if($count==1 && $answered!=3)
 {
 $sql="select * from oe_mechatron_answers where O='$option'";
 $result=mysqli_query($con,$sql) or die(mysqli_error());
@@ -45,7 +46,6 @@ $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result,MYSQL_ASSOC);
 $opt=$row['Options'];
 $opt=unserialize($opt);
-$opt=array_values($opt);
 $key=array_search($option, $opt);
 if($key!==FALSE)
 {
@@ -89,7 +89,6 @@ $result=mysqli_query($con,$sql);
 $row=mysqli_fetch_array($result,MYSQL_ASSOC);
 $opt=$row['Options'];
 $opt=unserialize($opt);
-$opt=array_values($opt);
 $key=array_search($option, $opt);
 if($key!==FALSE)
 {

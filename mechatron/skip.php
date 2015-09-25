@@ -11,6 +11,11 @@ $username=$_SESSION['username'];
  $row=mysqli_fetch_array($result,MYSQL_ASSOC);
  $qno=$row['QNo'];
  $skip=$row['Skip'];
+ $complete=$row['Complete'];
+ if($complete==1)
+ {
+ die();
+ }
  if($skip>0)
  {
  $skip--;

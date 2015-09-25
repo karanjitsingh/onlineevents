@@ -56,19 +56,13 @@
 	}
 	else
 	{
-		if(strrpos($name, "\'") ===true || strrpos($registration, "\'") ===true || strrpos($phone, "\'") ===true || strrpos($email, "\'") ===true || strrpos($college, "\'") ===true || strrpos($username, "\'") ===true || strrpos($password, "\'") ===true) {
-			echo json_encode($status103);
-		}
-		else if(strrpos($name, "\"") ===true || strrpos($registration, "\"") ===true || strrpos($phone, "\"") ===true || strrpos($email, "\"") ===true || strrpos($college, "\"") ===true || strrpos($username, "\"") ===true || strrpos($password, "\"") ===true) {
-			echo json_encode($status103);
-		}
-		else if(isRegistered($name,$email,$phone))
+		if(isRegistered($name,$email,$phone))
 		{
 			echo json_encode($status106);
 		}
 		else if(isAvailableUserName($username))
 		{
-			else if(!preg_match("/^[a-zA-Z ]*$/",$name))
+			if(!preg_match("/^[a-zA-Z ]*$/",$name))
 			{
 				echo json_encode($status103);
 			}

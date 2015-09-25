@@ -15,7 +15,7 @@ header('Location: http://oelanding.localhost.com/m');*/
 <link href='https://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
 <script src="./scripts/particles.js/particles.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-<script type="text/javascript" src="./scripts/form.js"></script>
+<script type="text/javascript" src="http://oelanding.localhost.com/scripts/form.js"></script>
 <style>
 	html,body {
 		height:100%;
@@ -254,6 +254,7 @@ header('Location: http://oelanding.localhost.com/m');*/
 	svg {
 		opacity:0;
 		transition: opacity 0.2s ease-out;
+		margin-right: 10px;
 	}
 
 	.disabled {
@@ -262,6 +263,10 @@ header('Location: http://oelanding.localhost.com/m');*/
 
 	#left-half .icon:nth-child(1){
 		cursor:default !important;
+	}
+
+	.err {
+		font-size: 14px; margin: 16px 0px 0px 10px;float: left;
 	}
 
 </style>
@@ -284,7 +289,7 @@ header('Location: http://oelanding.localhost.com/m');*/
 					<li><input type="password" placeholder="Password"/></li>
 					<li><input type="password" placeholder="Confirm Password"/></li>
 					<li>
-					<span style="font-size: 14px; color: #cc0000; margin: 16px 0px 0px 10px;float: left;"></span><input type="button" class="submit" value="Submit" onclick="register()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
+					<span class="err"></span><input type="button" class="submit" value="Submit" onclick="register()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
 
 						<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
@@ -313,7 +318,7 @@ header('Location: http://oelanding.localhost.com/m');*/
 					<li><span class="registration">Login:</span></li>
 					<li><input type="text" placeholder="Username"/></li>
 					<li><input type="password" placeholder="Password"/></li>
-					<li><span style="font-size: 14px; color: #cc0000; margin: 16px 0px 0px 10px;float: left;"></span><input type="button" class="submit" value="Login" onclick="login()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
+					<li><span class="err"></span><input type="button" class="submit" value="Login" onclick="login()"/><input type="button" class="cancel" value="Cancel" onclick="closePage()"/>
 						<svg width="28px" height="28px" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff" style="margin-top: 12px; margin-left: 6px; float: right;">
 						    <g fill="none" fill-rule="evenodd">
 						        <g transform="translate(1 1)" stroke-width="2">
@@ -419,15 +424,15 @@ header('Location: http://oelanding.localhost.com/m');*/
 	}
 
 	function openEvent(catname) {
-		$id("eventIframe").src = "http://oelanding.localhost.com/" + catname;
+		$id("eventIframe").src = "http://onlineevents.techtatva.in/" + catname;
 		$id("event").removeAttribute("class");
 	}
 
 	function unloadIframe(){
-		var frameDoc = $id("eventIframe");
-		frameDoc = frame.contentDocument || frame.contentWindow.document;
+		var frame = $id("eventIframe");
+		var frameDoc = frame.contentDocument || frame.contentWindow.document;
 		frameDoc.removeChild(frameDoc.documentElement);
-		frameDoc.src="";
+		frame.src="";
 	}
 
 	function closeEvent() {
@@ -462,6 +467,8 @@ header('Location: http://oelanding.localhost.com/m');*/
 	}
 
 	function openPage(page) {
+		if(ajaxwaiting)
+			return;
 		if(page == pageOpen){
 			closePage();
 			return;
