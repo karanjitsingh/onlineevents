@@ -1,5 +1,6 @@
 <?php
 include "../session.php";
+include "../leaderboard.php";
 ?>
 <!doctype html>
 <html>
@@ -240,6 +241,10 @@ include "../session.php";
 		padding-left: 6px;
 		color: #ddd;
 	}
+
+	#leaderboard li span:nth-child(1) {
+		width:120px;
+	}
 </style>
 </head>
 <body>
@@ -332,8 +337,8 @@ include "../session.php";
 			<td style="vertical-align:top;">
 				<div style="width:100%;;">
 					<ul style="list-style-type:none; margin:0px; padding:0px;">
-					<li><span class="registration">Leaderboard:</span></li>
-					<li>Coming Soon.</li>
+					<li><span class="registration">Leaderboard</span></li>
+					<li><span>Mechatron: <?php echo getMechatronLeaderboard(); ?></span></li>
 					<li><input type="button" class="cancel" value="Close" onclick="closePage()" style="float:none; margin:20px 0px 0px 0px;"/></li>
 					</ul>
 				</div>
