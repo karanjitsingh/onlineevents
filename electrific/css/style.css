@@ -1,0 +1,138 @@
+body {
+  background: #eee !important;
+font-family: 'Montserrat', sans-serif;
+}
+
+  body {
+    overflow: hidden;
+  }
+
+  /* Preloader */
+  #preloader {
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:#fff; /* change if the mask should have another color then white */
+    z-index:99; /* makes sure it stays on top */
+  }
+
+#tryit {
+      position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+  background-color: #EEEEEE;
+  z-index: 99999; 
+}
+
+  #status {
+    width:200px;
+    height:200px;
+    position:absolute;
+    left:50%; /* centers the loading animation horizontally one the screen */
+    top:50%; /* centers the loading animation vertically one the screen */
+    background-image:url(rename/Preloader_1.gif); /* path to your loading animation */
+    background-repeat:no-repeat;
+    background-position:center;
+    margin:-100px 0 0 -100px; /* is width and height divided by two */
+  }
+
+/* Paste this css to your style sheet file or under head tag */
+/* This only works with JavaScript, 
+if it's not present, don't show loader */
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(rename/Preloader_1.gif) center no-repeat #fff;
+}
+
+.electrific {
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+font-family: 'Montserrat', sans-serif;
+}
+.electrific .electrific-heading,
+.electrific .checkbox {
+  margin-bottom: 30px;
+font-family: 'Montserrat', sans-serif;
+}
+.electrific .checkbox {
+  font-weight: normal;
+}
+.electrific .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.electrific .form-control:focus {
+  z-index: 2;
+}
+.electrific input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.electrific input[type="question"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.electrific input[type="option4"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.electrific input[type="number"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.electrific input[type="file"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+
+
+
+/**********************************************************************************
+CSS
+*********************************************************************************/
+
+.previous, .play{
+  position: absolute;
+  margin-top: 80px;
+   width: 480px;
+   overflow: auto;
+}
+
+.previous{
+ left: 10vw;
+}
+
+.play{
+  left: 50vw;
+}
+
+#start-quiz{
+  width: 100px;
+}

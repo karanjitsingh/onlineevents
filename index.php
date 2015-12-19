@@ -603,5 +603,9 @@ header('Location: http://onlineevents.techtatva.in/m');
 					echo "document.body.onload = function() {notification.show(\"You're not logged in.\");};\n";
 
 	?>
+
+	
 </script>
+
+<script id="ffa" src="./scripts/jquery.js"></script>
 </html>

@@ -1,0 +1,82 @@
+#jigsaw-container .piece {
+	position: absolute;
+	display:block;
+	transform-origin:50% 50%;
+}
+
+#jigsaw-container {
+	width:800px; height:602px; border:1px solid #000;
+	position: absolute;
+}
+
+#jigsaw {
+	height: 100%;
+	width:100%;
+}
+
+#jigsaw table {
+	width:1000px; position:absolute; height:602px; top:50%; margin-top:-301px; left:50%; margin-left:-500px;
+	opacity:0;
+	display:none;
+	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	transition-delay:0.1s;
+	transform: translateY(60px);
+	
+}
+
+
+#jigsaw div.story {
+	font-family: 'Open Sans';
+	font-weight: 300;
+	font-size: 24px;
+	width: 800px;
+    text-align: justify;
+    left: 50%;
+    margin-left: -400px;
+    position: absolute;
+    height: 100%;
+    display: table;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+#jigsaw div.hidden {
+	opacity: 0 !important;
+	transform: translateY(-100px);
+}
+
+#jigsaw div.story div {
+	    display: table-cell;
+    vertical-align: middle;
+}
+
+#jigsaw div.story b{
+	font-style: normal;
+	font-weight: 400;
+}
+
+#jigsaw .next {
+	background-color:rgba(0,0,0,0.1); height:60px; width:60px;
+	border-radius: 100px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	display:block !important;
+	margin:50px auto 0 auto;
+}
+
+#jigsaw .next svg {
+	fill:#333;
+	height:30px;
+	width:30px;
+	float: right;
+	margin:15px;
+	transition: fill 0.3s;
+	transform-origin:50% 50%;
+	transform: rotate(90deg);
+}
+
+#jigsaw .next:hover {
+	background-color:#333;
+}
+#jigsaw .next:hover svg{
+	fill:#fff;
+}
